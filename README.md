@@ -24,10 +24,6 @@ Start the server
 This application should now be running on `localhost`. If you want to Fork repository and want to run locally, follow this guidelines [Fork and Clone Github Repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
 
 
-## Related
 
-Here are some related projects
-
-[Portfolio Project using React SASS](https://github.com/chetannada/React-SASS-Portfolio)
 
 
