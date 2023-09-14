@@ -170,7 +170,7 @@
             <h2 class="title fadein">My Projects</h2>
             <div class="carousel owl-carousel">
                <div class="card">
-                  <a href="https://github.com/Ravi07kiran/B-MODAL-1" target="_blank">
+                  <a href="https://github.com/Ravi07kiran/B-MODAL-1.git" target="_blank">
                      <div class="box">
                         <img src="./images/vote.jpg" alt="Voting application">
                         <p>B-Model voting application using</p>
@@ -179,7 +179,7 @@
                   </a>
                </div>
                <div class="card">
-                  <a href="https://github.com/Ravi07kiran/Cred-ex" target="_blank">
+                  <a href="https://github.com/Ravi07kiran/Cred-ex.git" target="_blank">
                      <div class="box">
                         <img src="./images/credex.jpg" alt="ReactJs Marketplace">
                         <p>Blockchain Based Marketplace</p>
@@ -188,7 +188,7 @@
                   </a>
                </div>
                <div class="card">
-                  <a href="https://github.com/Ravi07kiran/Virt-HR" target="_blank">
+                  <a href="https://github.com/Logeshvarman/Virt-HR.git" target="_blank">
                      <div class="box">
                         <img src="./images/virthr.jpeg" alt="Hr trackinplatform">
                         <p>HR Tracking Platform using</p>
@@ -268,20 +268,20 @@
                   <form action="#">
                      <div class="fields">
                         <div class="field name">
-                           <input type="text" placeholder="Name" required>
+                           <input type="text" placeholder="Name" name="name" id="name" required>
                         </div>
                         <div class="field email">
-                           <input type="email" placeholder="Email" name="email" required>
+                           <input type="email" placeholder="Email" name="email" id="email" required>
                         </div>
                      </div>
                      <div class="field">
-                        <input type="text" placeholder="Subject" required>
+                        <input type="text" placeholder="Subject" id="bio" name="bio" required>
                      </div>
                      <div class="field textarea">
-                        <textarea cols="30" rows="10" placeholder="Describe Project..." required></textarea>
+                        <textarea cols="30" rows="10" placeholder="Describe Project..." name="project" id="project" required></textarea>
                      </div>
                      <div class="button">
-                        <button type="submit">Send Message <i class="fas fa-paper-plane"></i>
+                        <button type="submit" sendMessage()>Submit</button>
                         </button>
                      </div>
                   </form>
@@ -289,6 +289,65 @@
             </div>
          </div>
       </section>
+      <script type="module">
+
+         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+         
+         const firebaseConfig = {
+    apiKey: "AIzaSyBfWTgqPgXRHi4tP6xaSZhISKtiAq8m7r4",
+    authDomain: "portfolio-dc9bd.firebaseapp.com",
+    projectId: "portfolio-dc9bd",
+    storageBucket: "portfolio-dc9bd.appspot.com",
+    messagingSenderId: "375496224627",
+    appId: "1:375496224627:web:bfcd86c75894563a08df06",
+    measurementId: "G-46VMNPR66D"
+  };
+         
+               // Initialize Firebase
+          const app = initializeApp(firebaseConfig);
+          import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+          
+          //listen for submit event//(1)
+             document
+               .getElementById('registrationform')
+               .addEventListener('submit', formSubmit);
+         
+             //Submit form(1.2)
+             function formSubmit(e) {
+               e.preventDefault();
+               // Get Values from the DOM
+               let name = document.querySelector('#name').value;
+               let email = document.querySelector('#email').value;
+               let bio = document.querySelector('#bio').value;
+               let project = document.querySelector('#project').value;
+               sendMessage(name, email, bio, project);
+    }
+
+    //Send Message to Firebase(4)
+    function sendMessage(name, email, bio, project) {
+      const database = getDatabase();
+
+      set(ref(database, 'users/' + Math.floor(Math.random() * 10000000)), {
+        name: name,
+        email: email,
+        bio: bio,
+        project: project
+      }).then(() => {
+
+         
+          //Show Alert Message(5)
+       document.querySelector('.alert').style.display = 'block';
+        //Hide Alert Message After Seven Seconds(6)
+       setTimeout(function () {
+       document.querySelector('.alert').style.display = 'none';
+       }, 7000);
+       document.getElementById('registrationform').reset();
+      }).catch((error) => {
+        alert(error)
+      })
+    }
+
+           </script>
     
       <footer>
          <span>Created By <a href="https://www.linkedin.com/in/ravi-kiran-n-80488b282/" target="_blank">Ravi Kiran</a> | <span class="far fa-copyright"></span> 2023 All rights reserved </span>
